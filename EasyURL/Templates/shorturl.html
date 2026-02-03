@@ -1,12 +1,135 @@
-<html>
-    <head>
-        <title>
-            Short url
-        </title>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shorten URL | EasyURL</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
 
-        <body>
-            THIS IS SHORT URL page
-        </body>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
 
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      
+      <!-- Logo text -->
+      <div class="text-xl font-bold text-black">
+        EasyURL
+      </div>
+
+      <!-- Profile Dropdown -->
+<div class="relative group">
+  
+  <!-- Profile Icon -->
+  <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center cursor-pointer hover:bg-indigo-200 transition">
+    👤
+  </div>
+
+  <!-- Dropdown Menu -->
+  <div
+    class="absolute right-0 mt-2 w-40 rounded-lg bg-white shadow-lg border border-gray-200
+           opacity-0 invisible group-hover:opacity-100 group-hover:visible
+           transition-all duration-200 z-50"
+  >
+    <!-- Dropdown Menu  -->
+    {% if request.user.is_authenticated %}
+  <!--FOR LOGGED IN USER -->
+      <a href="" class="block px-4 py-2 text-sm hover:bg-indigo-50">
+            Dashboard
+          </a>
+          <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-indigo-50 text-red-600">
+            Logout
+          </a>
+
+      {% else %}
+
+      <!-- FOR ANONYMOUS USER -->
+    <a href="{% url 'login' %}"
+       class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 rounded-t-lg">
+      Login
+    </a>
+    <a href="{% url 'register' %}"
+       class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 rounded-b-lg">
+      Register
+    </a>
+
+
+
+
+    {% endif %}
+
+  </div>
+
+</div>
+    </div>
+  </nav>
+
+  
+
+  <!-- Main Content -->
+  <div class="flex items-center justify-center px-4 py-20">
+    <div class="w-full max-w-2xl bg-white rounded-3xl shadow-xl p-10">
+
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-slate-900">Shorten Your URL</h1>
+        <p class="text-slate-600 mt-2">
+          Paste your long link below and get a short one instantly
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form class="space-y-4" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="user_idd" value="rgdfth">
+
+        <input
+          name="user_url"
+          type="url"
+          placeholder="https://example.com/very-long-url"
+          required
+          class="w-full px-4 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"/>
+          
+          <p>Expiry Date:</p>
+
+          <select name="expire_time"> <!-- Expiry time in hours-->
+              <option value="">Never expire</option>
+              <option value="1">1 Hour</option>
+              <option value="24">24 Hours</option>
+              <option value="168">7 Days</option>
+            </select>
+
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-4 rounded-xl font-semibold hover:opacity-90 transition">
+          Shorten URL
+        </button>
+      </form>
+
+      <!-- short urls -->
+      {% if short_url %}
+          <div class="mt-8 p-4 bg-indigo-50 rounded-xl text-center">
+            <p class="text-sm text-slate-600">Your shortened URL</p>
+
+            <div class="flex items-center justify-center gap-2 mt-2">
+              <input
+                type="text"
+                value="{{ short_url }}"
+                readonly
+                class="w-full max-w-sm px-3 py-2 rounded-lg border bg-white text-indigo-700 font-semibold"
+              />
+
+              <button
+                onclick="navigator.clipboard.writeText('{{ short_url }}')"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          {% endif %}
+
+    </div>
+  </div>
+
+</body>
 </html>
