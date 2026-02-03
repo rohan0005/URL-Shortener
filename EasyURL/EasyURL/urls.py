@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('', include("shorturl.urls")),  
     path('', include("users.urls")),  
+    path('', include("qrCode.urls")),  
     
     
 ]

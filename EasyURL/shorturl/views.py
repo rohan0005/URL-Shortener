@@ -41,7 +41,7 @@ def shortUrl(request):
         object.save()
         print("success")
     
-        return render(request, "shorturl.html", {"short_url": short_url})
+        return render(request, "shorturl.html", {"short_url": short_url, "short_key": object.short_key})
 
         
     return render(request,"shorturl.html")
