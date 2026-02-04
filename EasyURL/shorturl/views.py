@@ -50,12 +50,16 @@ def shortUrl(request):
 
 
 
-
+#redirecting short url to original url
 def redirect_short_url(request, short_key):
     object = get_object_or_404(ShortUrl,short_key=short_key)
     
     if object.is_expired():
         return HttpResponseGone("This short URL has expired.")
+    
+    # incrementing click count
+    object.clicks +=1
+    object.save()
     
     return redirect(object.original_url)
 

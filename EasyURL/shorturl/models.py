@@ -10,6 +10,7 @@ class ShortUrl(models.Model):
     short_key = models.CharField(unique=True, max_length=10, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     expiry_date = models.DateTimeField(null=True, blank=True)
+    clicks = models.PositiveIntegerField(default=0)  
     
     def is_expired(self):
         if self.expiry_date is None:
