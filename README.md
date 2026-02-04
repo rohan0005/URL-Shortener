@@ -56,7 +56,7 @@ Install python-10 or 11 and python-pip. Follow the steps from the below referenc
 
 3.  Clone git repository
 
-        git clone "https://github.com/rohan0005/RoomRent.git"
+        git clone "https://github.com/rohan0005/URL-Shortener.git"
 
 4.  Install requirements
 
