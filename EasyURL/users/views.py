@@ -2,12 +2,15 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from shorturl.models import ShortUrl
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 
 # Create your views here.
 def loginUser(request):
     
+    if request.user.is_authenticated: return redirect('home')
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -27,7 +30,9 @@ def loginUser(request):
     
     return render(request, "Authentication/login.html")
 
+
 def registerUser(request):
+    if request.user.is_authenticated: return redirect('home')
 
     try:
         if request.method == "POST":
@@ -50,7 +55,7 @@ def logoutUser(request):
     messages.success(request, 'Successfully Logged Out')
     return redirect('login')
 
-
+@login_required(login_url='login')
 def UserDashboard(request):
     
     user = request.user

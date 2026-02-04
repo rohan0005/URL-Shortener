@@ -1,14 +1,9 @@
+{% extends 'NavigationBarBase/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Sign Up | EasyURL</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
+{% block title %}Register - EasyURL{% endblock %}
+{% block content %}
 
-<body class="min-h-screen bg-white from-blue-600 to-indigo-700 flex items-center justify-center px-4">
-
+<div class="min-h-[calc(100vh-120px)] flex items-center justify-center px-4">
   <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-10">
 
     <!-- Header -->
@@ -61,6 +56,6 @@
     </p>
 
   </div>
+</div>
 
-</body>
-</html>
+{% endblock %}

@@ -18,10 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 from EasyURL import views
 
+# Custom 404 error view
+handler404 = 'EasyURL.views.error_404'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('404/', views.error_404, name='error_404'),
     path('', include("shorturl.urls")),  
     path('', include("users.urls")),  
     path('', include("qrCode.urls")),  

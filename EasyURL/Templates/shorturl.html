@@ -1,69 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Shorten URL | EasyURL</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-
-<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-      
-      <!-- Logo text -->
-      <div class="text-xl font-bold text-black">
-        EasyURL
-      </div>
-
-      <!-- Profile Dropdown -->
-<div class="relative group">
-  
-  <!-- Profile Icon -->
-  <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center cursor-pointer hover:bg-indigo-200 transition">
-    👤
-  </div>
-
-  <!-- Dropdown Menu -->
-  <div
-    class="absolute right-0 mt-2 w-40 rounded-lg bg-white shadow-lg border border-gray-200
-           opacity-0 invisible group-hover:opacity-100 group-hover:visible
-           transition-all duration-200 z-50"
-  >
-    <!-- Dropdown Menu  -->
-    {% if request.user.is_authenticated %}
-  <!--FOR LOGGED IN USER -->
-      <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm hover:bg-indigo-50">
-            Dashboard
-          </a>
-          <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-indigo-50 text-red-600">
-            Logout
-          </a>
-
-      {% else %}
-
-      <!-- FOR ANONYMOUS USER -->
-    <a href="{% url 'login' %}"
-       class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 rounded-t-lg">
-      Login
-    </a>
-    <a href="{% url 'register' %}"
-       class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 rounded-b-lg">
-      Register
-    </a>
+{% extends 'NavigationBarBase/base.html' %}
+{% load static %}
+{% block title %}Shorten URL - EasyURL{% endblock %}
+{% block content %}
 
 
-
-
-    {% endif %}
-
-  </div>
-
-</div>
-    </div>
-  </nav>
-
-  
 
   <!-- Main Content -->
   <div class="flex items-center justify-center px-4 py-10">
@@ -153,5 +93,4 @@
 
   </div>
 
-</body>
-</html>
+{% endblock %}
