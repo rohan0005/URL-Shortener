@@ -6,7 +6,7 @@ from django.utils import timezone
 class ShortUrl(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     original_url = models.URLField()
-    short_url = models.CharField(unique=True, max_length=10, blank=True, null=True)
+    short_url = models.CharField(unique=True, max_length=100, blank=True, null=True)
     short_key = models.CharField(unique=True, max_length=10, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     expiry_date = models.DateTimeField(null=True, blank=True)
@@ -18,4 +18,4 @@ class ShortUrl(models.Model):
     
     
     def __str__(self):
-        return self.short_key
+        return str(self.short_key)

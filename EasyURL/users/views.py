@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from shorturl.models import ShortUrl
 
 from .forms import *
 
@@ -48,3 +49,18 @@ def logoutUser(request):
     logout(request)
     messages.success(request, 'Successfully Logged Out')
     return redirect('login')
+
+
+def UserDashboard(request):
+    
+    user = request.user
+    
+    URLDetails = ShortUrl.objects.filter(user=user)
+    
+    print(URLDetails)
+    
+    context = {
+        "URLDetails": URLDetails
+    }
+    
+    return render(request, "dashboard.html", context)

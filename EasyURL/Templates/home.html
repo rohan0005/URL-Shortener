@@ -37,7 +37,7 @@
     <!-- Dropdown Menu  -->
     {% if request.user.is_authenticated %}
   <!--FOR LOGGED IN USER -->
-      <a href="" class="block px-4 py-2 text-sm hover:bg-indigo-50">
+      <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm hover:bg-indigo-50">
             Dashboard
           </a>
           <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm hover:bg-indigo-50 text-red-600">
